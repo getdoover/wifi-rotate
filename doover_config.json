@@ -1,16 +1,15 @@
 {
-    "sample_application": {
-        "key": "32134bbb-5278-43c0-a6ca-4046a5edeb9f",
-        "name": "sample_application",
-        "display_name": "Sample Application",
+    "wifi_rotate": {
+        "name": "wifi_rotate",
+        "display_name": "Wifi Rotate",
         "type": "DEV",
         "visibility": "PUB",
         "allow_many": true,
-        "description": "A template application for Doover",
+        "description": "A Doover App to Cycle through Multiple Wifi Networks",
         "long_description": "README.md",
         "depends_on": [],
         "owner_org_key": "",
-        "image_name": "ghcr.io/getdoover/app_template",
+        "image_name": "ghcr.io/getdoover/wifi-rotate:main",
         "container_registry_profile_key": "",
         "build_args": "--platform linux/amd64,linux/arm64",
         "config_schema": {
@@ -19,33 +18,58 @@
             "title": "Application Config",
             "type": "object",
             "properties": {
-                "digital_outputs_enabled": {
-                    "title": "Digital Outputs Enabled",
-                    "x-name": "digital_outputs_enabled",
+                "profiles": {
+                    "title": "Profiles",
+                    "x-name": "profiles",
                     "x-hidden": false,
-                    "type": "boolean",
-                    "default": true
-                },
-                "a_funny_message": {
-                    "title": "A Funny Message",
-                    "x-name": "a_funny_message",
-                    "x-hidden": false,
-                    "type": "string"
-                },
-                "simulator_app_key": {
-                    "format": "doover-application",
-                    "title": "Simulator App Key",
-                    "x-name": "simulator_app_key",
-                    "x-hidden": false,
-                    "type": "string",
-                    "description": "The app key for the simulator"
+                    "type": "array",
+                    "items": {
+                        "title": "Wifi Profile",
+                        "x-name": "wifi_profile",
+                        "x-hidden": false,
+                        "type": "object",
+                        "description": "The wifi profile to rotate through",
+                        "properties": {
+                            "ssid": {
+                                "title": "SSID",
+                                "x-name": "ssid",
+                                "x-hidden": false,
+                                "type": "string",
+                                "description": "The SSID (name) of the wifi network"
+                            },
+                            "password": {
+                                "title": "Password",
+                                "x-name": "password",
+                                "x-hidden": false,
+                                "type": "string",
+                                "description": "The password for the wifi network"
+                            },
+                            "hold_time": {
+                                "title": "Hold Time",
+                                "x-name": "hold_time",
+                                "x-hidden": false,
+                                "type": "integer",
+                                "description": "The time in seconds to hold on to the wifi network before rotating",
+                                "default": 180
+                            }
+                        },
+                        "additionalElements": true,
+                        "required": [
+                            "ssid",
+                            "password"
+                        ]
+                    }
                 }
             },
             "additionalElements": true,
             "required": [
-                "a_funny_message",
-                "simulator_app_key"
+                "profiles"
             ]
-        }
+        },
+        "owner_org": "36a22e32-ab81-4a39-b400-869d532a052d",
+        "container_registry_profile": "88953909-e9c4-4f81-9ec0-56239d4b0a2e",
+        "key": "c9a2a076-ad4d-4f83-9e4f-d0a5266118d1",
+        "repo_branch": "main",
+        "staging_config": {}
     }
 }

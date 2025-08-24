@@ -27,6 +27,13 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 ## SECOND STAGE ##
 FROM base_image AS final_image
 
+# Install nmcli (from network-manager) and ping/curl for connectivity checks
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends network-manager && \
+    rm -rf /var/lib/apt/lists/*
+# We are NOT starting NetworkManager in the container; nmcli will talk over D-Bus to the HOST NM.
+
+
 COPY --from=builder --chown=app:app /app /app
 ENV PATH="/app/.venv/bin:$PATH"
 CMD ["doover-app-run"]

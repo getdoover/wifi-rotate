@@ -1,6 +1,14 @@
 {
-    "simulator_app_key": "sim_app_key",
-    "digital_input_count": 1,
-    "digital_output_count": 2,
-    "a_funny_message": "yeeha"
+    "profiles": [
+        {
+            "ssid": "AP1",
+            "password": "passphrase",
+            "hold_time": 15
+        },
+        {
+            "ssid": "AP2",
+            "password": "passphrase2",
+            "hold_time": 15
+        }
+    ]
 }
