@@ -1,7 +1,7 @@
 
 
 services:
-  endress_promag:
+  wifi_rotate:
     image: ghcr.io/getdoover/wifi-rotate:main
     restart: unless-stopped
     network_mode: host
