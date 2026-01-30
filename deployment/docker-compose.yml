@@ -2,7 +2,7 @@
 
 services:
   wifi_rotate:
-    image: ghcr.io/getdoover/wifi-rotate:main
+    image: ghcr.io/getdoover/wifi-rotate:dv1
     restart: unless-stopped
     network_mode: host
     environment:
