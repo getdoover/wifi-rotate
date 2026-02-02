@@ -70,6 +70,15 @@
         "container_registry_profile": "88953909-e9c4-4f81-9ec0-56239d4b0a2e",
         "key": "c9a2a076-ad4d-4f83-9e4f-d0a5266118d1",
         "repo_branch": "main",
-        "staging_config": {}
+        "staging_config": {},
+        "lambda_config": {},
+        "owner_org_id": null,
+        "container_registry_profile_id": "93955828574386692",
+        "id": "144013136758883844",
+        "organisation_id": null,
+        "code_repo_id": null,
+        "export_config_command": null,
+        "run_command": null,
+        "lambda_arn": null
     }
 }
