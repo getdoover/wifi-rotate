@@ -11,5 +11,6 @@ def test_import_app():
 def test_config():
     from wifi_rotate.app_config import WifiRotateConfig
 
-    config = WifiRotateConfig()
-    assert isinstance(config.to_dict(), dict)
+    schema = WifiRotateConfig.to_schema()
+    assert isinstance(schema, dict)
+    assert len(schema["properties"]) > 0
