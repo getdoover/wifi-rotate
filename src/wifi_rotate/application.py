@@ -10,6 +10,8 @@ from .app_config import WifiRotateConfig
 log = logging.getLogger()
 
 class WifiRotateApplication(Application):
+    config_cls = WifiRotateConfig
+
     config: WifiRotateConfig  # not necessary, but helps your IDE provide autocomplete!
 
     def __init__(self, *args, **kwargs):
