@@ -49,11 +49,22 @@ class WifiRotateApplication(Application):
             if self.current_profile_index >= len(self.profiles):
                 self.current_profile_index = 0
         self.last_wifi_change = time.time()
+        ssid = self.current_profile.ssid.value
         try:
-            nmcli.device.wifi_connect(self.current_profile.ssid.value, self.current_profile.password.value)
+            # Activate the pre-provisioned NetworkManager profile rather than
+            # `device wifi connect`. The doovit host's NetworkManager is older
+            # than the container's nmcli, and `wifi_connect` rewrites the whole
+            # profile — tripping `connection.autoconnect-ports: unknown property`
+            # across that version skew. `connection up` only activates an existing
+            # profile and is skew-tolerant (it's what the doovit's own wifi
+            # manager uses). Requires the profile to already exist on the host.
+            nmcli.connection.up(ssid)
         except Exception as e:
-            log.error(f"Error connecting to {self.current_profile.ssid.value}: {e}")
-            # traceback.print_exc()
+            log.error(f"Error activating profile {ssid}, attempting direct connect: {e}")
+            try:
+                nmcli.device.wifi_connect(ssid, self.current_profile.password.value)
+            except Exception as e2:
+                log.error(f"Error connecting to {ssid}: {e2}")
 
     @property
     def profiles(self):
